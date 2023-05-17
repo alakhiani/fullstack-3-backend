@@ -2,19 +2,19 @@ const projectService = require('../services/projects');
 
 exports.getProjects = async (req, res) => {
     try {
-        let projects = await projectService.getProjects();        
+        let projects = await projectService.getProjects();
         res.status(200).json({
             status: 'success',
             data: projects
         });
-    } catch(err) {
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             status: 'error',
             message: 'Projects could not be retrieved.',
             details: err
         })
-    }    
+    }
 }
 
 exports.getProjectById = async (req, res) => {
@@ -24,7 +24,7 @@ exports.getProjectById = async (req, res) => {
             status: 'success',
             data: project
         });
-    } catch(err) {
+    } catch (err) {
         console.log(err);
         res.status(404).json({
             status: 'not found',
@@ -36,13 +36,12 @@ exports.getProjectById = async (req, res) => {
 
 exports.createProject = async (req, res) => {
     try {
-        console.log(req.body);
         let project = await projectService.createProject(req.body);
         res.status(201).json({
             status: 'success',
             data: project
         });
-    } catch(err) {
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             status: 'error',

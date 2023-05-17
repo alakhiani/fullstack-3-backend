@@ -19,7 +19,7 @@ const projectSchema = new Schema({
         required: true
     },
     tools: {
-        type: [{type: String}],
+        type: [{ type: String }],
         required: true
     },
     projectLink: {
