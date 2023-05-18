@@ -1,17 +1,16 @@
 const Project = require('../models/projects');
 
 exports.getProjects = async () => {
-
-    let timeoutMilliseconds = 20000;
     let projects = await Project.find()
-        .maxTimeMS(timeoutMilliseconds)
         .lean()
         .exec();
     return projects;
 }
 
 exports.getProjectById = async (id) => {
-    let project = await Project.findById(id).lean().exec();
+    let project = await Project.findById(id)
+        .lean()
+        .exec();
     return project;
 }
 
@@ -28,8 +27,14 @@ exports.createProject = async (data) => {
 }
 
 exports.updateProject = async (id, data) => {
-    let project = await Project.findByIdAndUpdate(id, data, {
+    return await Project.findByIdAndUpdate(id, data, {
         new: true,
-        runValidators: true,
-    });
+        runValidators: true
+    })
+        .lean()
+        .exec();
 }
+
+// TODO: Day8, Add delete project method
+
+// TODO: Day8, Add contact me to save a list of potential contacts
