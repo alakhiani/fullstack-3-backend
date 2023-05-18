@@ -5,5 +5,6 @@ const ProjectController = require('../controllers/projects');
 router.get('/', ProjectController.getProjects);
 router.get("/:id", ProjectController.getProjectById);
 router.post('/', ProjectController.createProject);
+router.put('/:id', ProjectController.updateProject);
 
 module.exports = router;

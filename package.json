@@ -9,7 +9,7 @@
     "mongoose": "^7.1.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --watch",
     "start": "nodemon app.js"
   },
   "repository": {
@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/alakhiani/fullstack-3-backend#readme",
   "devDependencies": {
+    "chance": "^1.1.11",
+    "jest": "^29.5.0",
     "nodemon": "^2.0.22"
   }
 }

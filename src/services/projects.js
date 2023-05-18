@@ -26,3 +26,10 @@ exports.createProject = async (data) => {
     });
     return await project.save();
 }
+
+exports.updateProject = async (id, data) => {
+    let project = await Project.findByIdAndUpdate(id, data, {
+        new: true,
+        runValidators: true,
+    });
+}

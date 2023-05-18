@@ -50,3 +50,20 @@ exports.createProject = async (req, res) => {
         })
     }
 }
+
+exports.updateProject = async (req, res) => {
+    try {
+        let project = await projectService.updateProject(req.params.id, req.body);
+        res.status(200).json({
+            status: 'success',
+            data: project
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            status: 'error',
+            message: 'Project could not be updated.',
+            details: err
+        })
+    }
+}
