@@ -10,6 +10,7 @@
   },
   "scripts": {
     "test": "jest --watch",
+    "coverage": "jest --coverage",
     "start": "nodemon app.js"
   },
   "repository": {
