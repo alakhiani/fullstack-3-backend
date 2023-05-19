@@ -12,17 +12,19 @@ const start = async (port, database_uri) => {
     try {
         await mongoose.connect(database_uri);
         console.log('Connected to MongoDB Atlas');
-        app.listen(port, () => {
+        const server = app.listen(port, () => {
             console.log('Express server is listening on port', port);
         });
+        return server;
     } catch (error) {
         console.error('Error connecting to MongoDB Atlas:', error);
     }
 };
 
-// Establish the MongoDB Atlas database connection and start the Express server
 const port = process.env.PORT || 8000;
 const database_uri = process.env.MONGO_URI;
+
+// Establish the MongoDB Atlas database connection and start the Express server
 if (process.env.NODE_ENV !== 'test') {
     // Only connect to the database when not running tests
     start(port, database_uri);

@@ -3,59 +3,34 @@ const { app, start } = require('../../../app');
 const Project = require('../../models/projects');
 
 const mongoose = require('mongoose');
+let server;
 
 beforeAll(async () => {
-    await start(process.env.TEST_PORT || 8004, process.env.MONGO_TEST_URI);
+    server = await start(process.env.TEST_PORT || 8004, process.env.MONGO_TEST_URI);
 });
 
 afterAll(async () => {
     await mongoose.connection.close();
+    await server.close();
 });
-
-// describe('GET /projects', () => {
-//     const projectOne = {
-//         name: 'Project One',
-//         projectLink: 'https://www.example.com',
-//         description: 'Lorem ipsum',
-//         overview: 'Lorem ipsum',
-//         imageUrl: 'https://www.example.com/image.png',
-//         tools: ['Lorem ipsum', 'Lorem ipsum ipsum'],
-//     }
-
-//     test('should return all projects in the database', async () => {
-//         //await Project.deleteMany();
-//         await Project.create(projectOne);
-
-//         const response = await request(app).get('/projects');
-//         expect(response.statusCode).toBe(200);
-//         const projects = response.body.projects;
-//         expect(Array.isArray(projects)).toBe(true);
-//         expect(projects.length).toBe(1);
-//         expect(projects).toEqual(
-//             expect.arrayContaining([
-//                 expect.objectContaining(projectOne)
-//             ])
-//         );
-//     });
-// });
 
 describe("GET /projects", () => {
     const projectOne = {
         name: "Project one",
-        projectLink: "projectone.com",
+        projectLink: "project.one.com",
         description: "This is a first project",
         overview: "a brief overview of the project",
-        imageUrl: "projectone.com/image.png",
+        imageUrl: "project.one.com/image.png",
         tools: ["HTML", "CSS", "Java"],
     };
 
     const projectTwo = {
         name: "Project two",
-        projectLink: "projecttwo.com",
+        projectLink: "project.two.com",
         description: "This is the second project",
         overview: "a brief overview of the project",
-        imageUrl: "projecttwo.com/image.png",
-        tools: ["HTML", "Python"],
+        imageUrl: "project.two.com/image.png",
+        tools: ["HTML", "Python", "Express"],
     };
 
     it("should return all projects in database", async () => {
