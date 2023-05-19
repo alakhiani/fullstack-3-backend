@@ -67,3 +67,29 @@ exports.updateProject = async (req, res) => {
         })
     }
 }
+
+exports.deleteProject = async (req, res) => {
+    try {
+        const project = await projectService.deleteProject(req.params.id);
+        if (project) {
+            // Document was deleted
+            res.status(200).json({
+                status: 'success',
+                data: project,
+            });
+        } else {
+            // Document was not found
+            res.status(404).json({
+                status: 'error',
+                message: 'Project not found, nothing was deleted.',
+            });
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            status: 'error',
+            message: 'Project could not be deleted.',
+            details: err,
+        });
+    }
+};

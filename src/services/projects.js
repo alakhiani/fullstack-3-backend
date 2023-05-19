@@ -35,6 +35,10 @@ exports.updateProject = async (id, data) => {
         .exec();
 }
 
-// TODO: Day8, Add delete project method
+exports.deleteProject = async (id) => {
+    return await Project.findByIdAndDelete(id)
+        .lean()
+        .exec();
+}
 
 // TODO: Day8, Add contact me to save a list of potential contacts

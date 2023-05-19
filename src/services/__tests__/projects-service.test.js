@@ -61,3 +61,54 @@ describe('When calling the update project service method', () => {
         expect(result).toEqual(updatedProject);
     })
 })
+
+describe('When calling the delete project service method', () => {
+    let id, projectData;;
+
+    beforeEach(() => {
+        id = chance.guid();
+
+        projectData = {
+            name: chance.word(),
+            description: chance.paragraph(),
+        };
+
+        updatedProject = projectData;
+
+        Project.findByIdAndDelete = jest.fn().mockReturnThis();
+        Project.lean = jest.fn().mockReturnThis();
+        Project.exec = jest.fn().mockResolvedValue(updatedProject);
+    })
+
+    test('should call Project.findByIdAndDelete with the id', async () => {
+        // ACT
+        await ProjectService.deleteProject(id);
+
+        // ASSERT
+        expect(Project.findByIdAndDelete).toHaveBeenCalledWith(id);
+    })
+
+    test('should call project.lean', async () => {
+        // ACT
+        await ProjectService.deleteProject(id);
+
+        // ASSERT
+        expect(Project.lean).toBeCalled();
+    })
+
+    test('should call project.exec', async () => {
+        // ACT
+        await ProjectService.deleteProject(id);
+
+        // ASSERT
+        expect(Project.exec).toBeCalled();
+    })
+
+    test('should return the updated project', async () => {
+        // ACT
+        const result = await ProjectService.deleteProject(id);
+
+        // ASSERT
+        expect(result).toEqual(projectData);
+    })
+})
