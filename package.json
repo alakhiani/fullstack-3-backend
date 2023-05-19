@@ -11,7 +11,8 @@
   "scripts": {
     "test": "jest --watch",
     "coverage": "jest --coverage",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "load-test": "k6 run src/loadTesting/load-testing.js"
   },
   "repository": {
     "type": "git",
