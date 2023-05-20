@@ -154,7 +154,7 @@ describe('When calling the project controller delete project', () => {
         await ProjectController.deleteProject(req, res);
 
         // ASSERT
-        expect(res.status).toHaveBeenCalledWith(200);
+        expect(res.status).toHaveBeenCalledWith(204);
     })
 
     test('Positive Test: call to ProjectController.deleteProject should call res.json with deleted project data', async () => {

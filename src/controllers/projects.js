@@ -2,6 +2,7 @@ const projectService = require('../services/projects');
 
 exports.getProjects = async (req, res) => {
     try {
+        if (process.env.LOG_LEVEL === 'trace') console.log("In getProjects");
         let projects = await projectService.getProjects();
         res.status(200).json({
             status: 'success',
@@ -19,6 +20,7 @@ exports.getProjects = async (req, res) => {
 
 exports.getProjectById = async (req, res) => {
     try {
+        if (process.env.LOG_LEVEL === 'trace') console.log("In getProjectById");
         let project = await projectService.getProjectById(req.params.id);
         res.status(200).json({
             status: 'success',
@@ -36,6 +38,7 @@ exports.getProjectById = async (req, res) => {
 
 exports.createProject = async (req, res) => {
     try {
+        if (process.env.LOG_LEVEL === 'trace') console.log("In createProject");
         let project = await projectService.createProject(req.body);
         res.status(201).json({
             status: 'success',
@@ -53,6 +56,7 @@ exports.createProject = async (req, res) => {
 
 exports.updateProject = async (req, res) => {
     try {
+        if (process.env.LOG_LEVEL === 'trace') console.log("In updateProject");
         let project = await projectService.updateProject(req.params.id, req.body);
         res.status(200).json({
             status: 'success',
@@ -70,10 +74,11 @@ exports.updateProject = async (req, res) => {
 
 exports.deleteProject = async (req, res) => {
     try {
+        if (process.env.LOG_LEVEL === 'trace') console.log("In deleteProject");
         const project = await projectService.deleteProject(req.params.id);
         if (project) {
             // Document was deleted
-            res.status(200).json({
+            res.status(204).json({
                 status: 'success',
                 data: project,
             });

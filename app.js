@@ -1,9 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 require('dotenv').config();
 const ProjectsRoutes = require('./src/routes/projects');
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use('/projects', ProjectsRoutes);
 
