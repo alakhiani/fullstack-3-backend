@@ -149,23 +149,13 @@ describe('When calling the project controller delete project', () => {
         expect(ProjectService.deleteProject).toHaveBeenCalledWith(id);
     })
 
-    test('Positive Test: call to ProjectController.deleteProject should call res.status with 200 status code', async () => {
+    test('Positive Test: call to ProjectController.deleteProject should call res.status with 204 status code', async () => {
         // ACT
         await ProjectController.deleteProject(req, res);
 
         // ASSERT
         expect(res.status).toHaveBeenCalledWith(204);
-    })
-
-    test('Positive Test: call to ProjectController.deleteProject should call res.json with deleted project data', async () => {
-        // ACT
-        await ProjectController.deleteProject(req, res);
-
-        // ASSERT
-        expect(res.json).toHaveBeenCalledWith({
-            status: 'success',
-            data: projectData,
-        })
+        expect(res.status().json).not.toHaveBeenCalledWith(); // Verify that res.json() was not called
     })
 
     it('Negative Test: call to ProjectController.deleteProject should call res.status with 500 status code when ProjectService.deleteProject call fails', async () => {

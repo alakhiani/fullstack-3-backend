@@ -78,10 +78,7 @@ exports.deleteProject = async (req, res) => {
         const project = await projectService.deleteProject(req.params.id);
         if (project) {
             // Document was deleted
-            res.status(204).json({
-                status: 'success',
-                data: project,
-            });
+            res.status(204).end();
         } else {
             // Document was not found
             res.status(404).json({
