@@ -40,5 +40,3 @@ exports.deleteProject = async (id) => {
         .lean()
         .exec();
 }
-
-// TODO: Day8, Add contact me to save a list of potential contacts
