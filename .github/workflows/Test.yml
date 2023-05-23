@@ -5,12 +5,17 @@ name: Node.js CI
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
+
+env:
+  MONGO_TEST_URI: ${{ secrets.MONGO_TEST_URI }}
+  TEST_PORT: ${{ vars.TEST_PORT }}
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+
+    environment: TestEnvironment
 
     strategy:
       matrix:
@@ -18,12 +23,16 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm run test-ci
+      - name: Use variables
+        run: |
+          echo "database variable : $MONGO_TEST_URI"
+          echo "port variable : $TEST_PORT"
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm run test-ci
