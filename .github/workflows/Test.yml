@@ -12,9 +12,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      TEST_PORT: ${{ env.TEST_PORT }}
-
     strategy:
       matrix:
         node-version: [18.x]
@@ -31,5 +28,6 @@ jobs:
     - run: npm run build --if-present
     - run: |
         echo "MONGO_TEST_URI=${{ secrets.MONGO_TEST_URI }}" >> $GITHUB_ENV
+        echo "TEST_PORT=${{ env.TEST_PORT }}" >> $GITHUB_ENV
         echo "TEST_ENV=development" >> $GITHUB_ENV
     - run: npm run test-ci
