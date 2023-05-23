@@ -26,8 +26,9 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
-    - run: |
-        echo "MONGO_TEST_URI=${{ secrets.MONGO_TEST_URI }}" >> $GITHUB_ENV
-        echo "TEST_PORT=${{ env.TEST_PORT }}" >> $GITHUB_ENV
-        echo "TEST_ENV=TestEnvironment" >> $GITHUB_ENV
+    - name: Set up environment variables
+      env:
+        MONGO_TEST_URI: ${{ secrets.MONGO_TEST_URI }}
+        TEST_PORT: ${{ env.TEST_PORT }}
+        TEST_ENV: TestEnvironment
     - run: npm run test-ci
