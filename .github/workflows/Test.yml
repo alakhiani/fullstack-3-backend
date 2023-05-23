@@ -29,5 +29,5 @@ jobs:
     - run: |
         echo "MONGO_TEST_URI=${{ secrets.MONGO_TEST_URI }}" >> $GITHUB_ENV
         echo "TEST_PORT=${{ env.TEST_PORT }}" >> $GITHUB_ENV
-        echo "TEST_ENV=development" >> $GITHUB_ENV
+        echo "TEST_ENV=TestEnvironment" >> $GITHUB_ENV
     - run: npm run test-ci
